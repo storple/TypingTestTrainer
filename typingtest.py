@@ -28,11 +28,13 @@ class TypingTest():
                     if ogChar != userChar:
                         self.wrongCharacters += 1
 
-
+        
         self.wpm = "{:.2f}".format(self.correctCharacters/5 / (self.timeElapsed/60))
         self.rawWPM = "{:.2f}".format(len(self.userContent)/5 / (self.timeElapsed/60))
         self.accuracy = "{:.2f}%".format((self.correctCharacters / len(self.quoteContent)) * 100)
 
+        print()
+    
         self.displayResults()
 
     def displayResults(self) -> None:
@@ -53,8 +55,21 @@ class TypingTest():
 
     def printIntro(self) -> None:
         print("Created by storple on GitHub (https://github.com/storple). Put your typing skills to the test!")
-
+        
+    def resetStats(self) -> None:
+        self.accuracy = 0.0
+        self.correctCharacters = 0
+        self.quoteAuthor = ""
+        self.quoteContent = ""
+        self.rawWPM = 0.0
+        self.timeElapsed = 0.0
+        self.userContent = ""
+        self.wpm = 0.0
+        self.wrongCharacters = 0
+        
     def startTest(self) -> None:
+        
+        self.resetStats()
 
         print("3")
         time.sleep(0.5)
@@ -73,11 +88,3 @@ class TypingTest():
         self.timeElapsed = time.perf_counter() - timeStart
         
         self.calculateResults()
-
-'''
-
-'''
-
-typingTest = TypingTest()
-# typingTest.printIntro()
-# typingTest.startTest()
