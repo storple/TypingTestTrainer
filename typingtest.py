@@ -20,6 +20,7 @@ class TypingTest():
 
         self.correctCharacters += min(self.quoteContent.count(" "), self.userContent.count(" ")) # include spaces to correct characters
 
+        # if user types word wrong, the word is counted wrong
         for (oWord, uWord) in zip(quote, userInput):
             if oWord == uWord:
                 self.correctCharacters += len(oWord)
@@ -28,7 +29,7 @@ class TypingTest():
                     if ogChar != userChar:
                         self.wrongCharacters += 1
 
-        
+        # WPM (5 characters in each word)
         self.wpm = "{:.2f}".format(self.correctCharacters/5 / (self.timeElapsed/60))
         self.rawWPM = "{:.2f}".format(len(self.userContent)/5 / (self.timeElapsed/60))
         self.accuracy = "{:.2f}%".format((self.correctCharacters / len(self.quoteContent)) * 100)
@@ -48,7 +49,8 @@ class TypingTest():
         print("\nQuote by {}\n".format(self.quoteAuthor))
 
     def generateRandomQuote(self) -> None:
-
+        
+        #TODO: add support for short/medium/long quotes
         quoteInfo = requests.get("https://api.quotable.io/quotes/random").json()[0]
         self.quoteContent = quoteInfo["content"]
         self.quoteAuthor = quoteInfo["author"]
